@@ -5,7 +5,11 @@ export default async function Post({ params: { id} }) {
   const post = await fetchData(`/${id}`);
 
   return (
-    <PostContent post={post} />
+    post ? (
+      <PostContent post={post} />
+    ) : (
+      <h2 className="text-xl font-bold">Some error</h2>
+    )
   );
 }
 

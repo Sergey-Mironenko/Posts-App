@@ -1,7 +1,10 @@
 export const fetchData = async (id = '') => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts' + id);
-    
-  const result = await res.json();
-    
-  return result;
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts' + id);
+
+    const parsedResponse = await response.json();
+    return parsedResponse;
+  } catch {
+    return null;
+  }
 }
