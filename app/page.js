@@ -1,24 +1,23 @@
 import Link from "next/link";
 import { fetchData } from "./utils/fetch";
+import Card from "./components/Card";
 
 export default async function Home() {
   const posts = await fetchData();
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold">Posts</h1>
-      
-      {posts ? (
-        posts.map(post => (
-          <div key={post.id} className="w-1/2 mt-10 p-5 rounded-md bg-slate-400 text-black">
-            <h2 className="mb-5 text-xl font-bold">{post.title}</h2>
-            <p className="mb-3">{post.body.slice(0, 20) + '...'}</p>
-            <Link className="text-gray-600 hover:underline" href={'/post/' + post.id}>More</Link>
-          </div>
-        ))
-      ) : (
-        <h2 className="text-xl font-bold">Some error</h2>
-      )}
+    <div className="flex flex-col content-around m-auto">
+      <h1 className="text-6xl text-gray-400 m-auto font-bold">Posts</h1>
+
+      <div className="flex flex-wrap gap-x-20 content-between">    
+        {posts ? (
+          posts.map(post => (
+            <Card key={post.id} title={post.title} body={post.body} id={post.id}/>
+          ))
+        ) : (
+          <h2 className="text-xl font-bold">Some error</h2>
+        )}
+      </div>
     </div>
   );
 }
